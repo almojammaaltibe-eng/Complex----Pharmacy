@@ -37,9 +37,58 @@ input,select{width:100%;padding:10px;margin:5px 0;background:#0f172a;border:1px 
 .fab{position:fixed;bottom:30px;right:30px;background:#f59e0b;color:#fff;border:none;border-radius:50px;padding:15px 25px;font-size:18px;font-weight:bold;cursor:pointer;box-shadow:0 4px 15px rgba(0,0,0,0.4);z-index:1000;transition:0.3s}
 .fab:hover{background:#d97706;transform:scale(1.05)}
 #storage-status{display:block;margin-top:15px;font-size:14px;font-weight:bold;color:#ef4444}
+
+/* 🔒 تنسيق شاشة حماية وقفل نظام الصيدلية المدمج */
+#lock-screen {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(135deg, #162a3b, #0a131c);
+    z-index: 9999999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    direction: rtl;
+}
+.login-box {
+    background: #1e293b;
+    padding: 35px 30px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    border-top: 4px solid #0ea5e9;
+}
+.login-box h2 { margin-bottom: 20px; font-size: 22px; color: #fff; }
+.login-box input {
+    width: 100%; padding: 12px; margin-bottom: 15px;
+    border-radius: 6px; border: 1px solid #334155;
+    background: #0f172a; color: #fff; text-align: center;
+    font-size: 18px; outline: none; box-sizing: border-box;
+}
+.login-box button {
+    width: 100%; padding: 12px; background: #0ea5e9;
+    color: white; border: none; border-radius: 8px;
+    font-weight: bold; cursor: pointer; font-size: 16px; transition: 0.3s;
+}
+.login-box button:hover { background: #0284c7; }
+.error-msg { color: #ef4444; margin-top: 12px; font-size: 14px; display: none; font-weight: bold; }
 </style>
 </head>
 <body>
+
+<div id="lock-screen">
+  <div class="login-box">
+    <h2>🔒 نظام الصيدلية المغلق</h2>
+    <p style="color: #94a3b8; font-size: 14px; margin-bottom: 20px;">يرجى إدخال كلمة المرور لصلاحية الوصول</p>
+    <input type="password" id="pharmacyPassword" placeholder="كلمة المرور" autofocus>
+    <button onclick="checkPharmacyAccess()">دخول النظام</button>
+    <div id="loginError" class="error-msg">❌ كلمة المرور التي أدخلتها غير صحيحة!</div>
+  </div>
+</div>
 
 <div class="container">
   <div class="header">
@@ -127,6 +176,39 @@ input,select{width:100%;padding:10px;margin:5px 0;background:#0f172a;border:1px 
 <div id="toast" style="transform: translateY(100px);">تم الحفظ التلقائي ✔️</div>
 
 <script>
+// 🔒 برمجيات التحقق وحماية النظام
+const MY_PHARMACY_KEY = "شبراملس_2026"; 
+
+(function checkLockStatusImmediate() {
+  if (sessionStorage.getItem("pharmacy_locked_auth") === "true") {
+    document.write('<style>#lock-screen { display: none !important; }</style>');
+  }
+})();
+
+function checkPharmacyAccess() {
+  const inputPass = document.getElementById("pharmacyPassword").value;
+  const errorDiv = document.getElementById("loginError");
+  
+  if (inputPass === MY_PHARMACY_KEY) {
+    sessionStorage.setItem("pharmacy_locked_auth", "true");
+    document.getElementById("lock-screen").style.display = "none";
+  } else {
+    errorDiv.style.display = "block";
+    document.getElementById("pharmacyPassword").value = "";
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const passInput = document.getElementById("pharmacyPassword");
+  if (passInput) {
+    passInput.addEventListener("keyup", function(event) {
+      if (event.key === "Enter") {
+        checkPharmacyAccess();
+      }
+    });
+  }
+});
+
 let drugs = [];
 let trans = [];
 let fileHandle = null;
@@ -254,7 +336,7 @@ function generateFullReport(){
     let actual = d.qty + internal + external; 
     return {
       'اسم العلاج': d.n,
-      'الكمية الفعلية': actual,
+      'الالكمية الفعلية': actual,
       'الصرف الداخلي': internal,
       'الصرف الخارجي': external,
       'الكمية المتوفرة حاليا': d.qty,
