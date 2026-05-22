@@ -1,191 +1,1078 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>حجوزات مجمع شبراملس الطبي</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #0097a7; 
-            --accent-color: #00bcd4;
-            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            --card-bg: rgba(255, 255, 255, 0.95);
-            --success-color: #2e7d32;
-            --cancel-color: #d32f2f;
-        }
-        body { font-family: 'Tajawal', sans-serif; background: var(--bg-gradient); background-attachment: fixed; margin: 0; padding: 20px; display: flex; justify-content: center; min-height: 100vh; }
-        .news-ticker { position: absolute; top: 0; left: 0; width: 100%; background-color: var(--primary-color); color: #fff; padding: 6px 0; overflow: hidden; z-index: 1000; }
-        .ticker-text { display: inline-block; white-space: nowrap; font-size: 15px; font-weight: 700; animation: marquee 25s linear infinite; }
-        @keyframes marquee { 0% { transform: translateX(-100vw); } 100% { transform: translateX(100vw); } }
-        
-        .main-wrapper { display: grid; grid-template-columns: 1fr 1.8fr 1fr; gap: 25px; max-width: 1500px; width: 100%; margin-top: 20px; }
-        .side-panel { background: var(--card-bg); border-radius: 25px; padding: 30px; height: fit-content; box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
-        .side-panel h3 { color: var(--primary-color); border-bottom: 2px solid var(--accent-color); padding-bottom: 10px; }
-        .container { background: var(--card-bg); border-radius: 30px; padding: 40px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.15); border-top: 8px solid var(--primary-color); }
-        .main-logo { width: 150px; height: 150px; border-radius: 50%; border: 4px solid var(--accent-color); margin-bottom: 20px; }
-        .form-group { margin-bottom: 25px; text-align: right; }
-        label { display: block; margin-bottom: 10px; font-weight: 700; color: var(--primary-color); }
-        input, select { width: 100%; padding: 16px; border: 2px solid #cfd8dc; border-radius: 15px; font-family: 'Tajawal'; font-size: 17px; }
-        .button-group { display: flex; gap: 15px; margin-top: 30px; }
-        .submit-btn { flex: 2; padding: 18px; background: linear-gradient(45deg, var(--primary-color), var(--accent-color)); color: white; border: none; border-radius: 15px; font-size: 20px; font-weight: 800; cursor: pointer; }
-        .cancel-btn { flex: 1; padding: 18px; background: #eceff1; color: var(--cancel-color); border: 2px solid var(--cancel-color); border-radius: 15px; font-size: 18px; font-weight: 700; cursor: pointer; }
-        #success-msg { display: none; }
-        @media (max-width: 1100px) { .main-wrapper { grid-template-columns: 1fr; } .side-panel { display: none; } }
-    </style>
+<!-- saved from url=(0144)file:///D:/%D9%85%D9%84%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D9%85%D8%AC%D9%85%D8%B9/index%20A%20-%20%D8%AC%D9%8A%20%D8%A8%D9%8A%20%D8%AA%D9%8A.html -->
+<html lang="ar" dir="rtl"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>نظام الصيدلية</title>
+<script src="./نظام الصيدلية 21_files/xlsx.full.min.js.download"></script>
+<style>
+/* السطر الجديد: ثيم صيدلية طبي مريح ومضيء */
+body{font-family:'Segoe UI',Tahoma,sans-serif;background: linear-gradient(135deg, #162a3b, #0a131c);background-attachment: fixed;color:#fff;margin:0;direction:rtl}
+.container{max-width:1200px;margin:0 auto;padding:20px}
+.header{text-align:center;margin-bottom:20px}
+.top-actions{text-align:center;margin-bottom:30px;padding-top:10px}
+.btn{background:#0ea5e9;color:#fff;border:none;padding:15px 30px;border-radius:8px;cursor:pointer;margin:5px;font-weight:bold;font-size:16px;transition:0.3s}
+.btn:hover{background:#0284c7}
+.btn-success{background:#10b981}
+.btn-warning{background:#f59e0b}
+.btn-danger{background:#ef4444}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-bottom:30px}
+.stat{background:#1e293b;padding:20px;border-radius:10px;text-align:center;border-top:4px solid #0ea5e9;min-height:100px;display:flex;flex-direction:column;justify-content:center}
+.stat h3{margin:0;color:#94a3b8;font-size:14px}
+.stat p{margin:10px 0 0;font-size:28px;font-weight:bold;color:#fff}
+.panel{background:#1e293b;padding:20px;border-radius:10px;margin-bottom:20px}
+table{width:100%;border-collapse:collapse;margin-top:15px}
+th,td{padding:12px;text-align:right;border-bottom:1px solid #334155}
+th{color:#94a3b8;font-weight:600}
+input,select{width:100%;padding:10px;margin:5px 0;background:#0f172a;border:1px solid #334155;color:#fff;border-radius:6px;box-sizing:border-box}
+.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:1000;justify-content:center;align-items:center}
+.modal-content{background:#1e293b;padding:30px;border-radius:15px;width:90%;max-width:500px}
+.close{color:#fff;float:left;font-size:28px;cursor:pointer}
+.badge{padding:4px 10px;border-radius:20px;font-size:12px}
+.bg-red{background:#ef4444}
+.bg-green{background:#10b981}
+.bg-orange{background:#f59e0b}
+#toast{position:fixed;bottom:20px;left:20px;background:#10b981;padding:15px 25px;border-radius:8px;transform:translateY(100px);transition:0.3s;z-index:9999}
+.radio-group{display:flex;gap:15px;margin:15px 0}
+
+/* الزر العائم للتسجيل السريع */
+.fab{position:fixed;bottom:30px;right:30px;background:#f59e0b;color:#fff;border:none;border-radius:50px;padding:15px 25px;font-size:18px;font-weight:bold;cursor:pointer;box-shadow:0 4px 15px rgba(0,0,0,0.4);z-index:1000;transition:0.3s}
+.fab:hover{background:#d97706;transform:scale(1.05)}
+
+/* مؤشر حالة التخزين */
+#storage-status{display:block;margin-top:15px;font-size:14px;font-weight:bold;color:#ef4444}
+</style>
 </head>
 <body>
 
-<div class="news-ticker">
-    <div class="ticker-text">مازالت عروض الإثنين الأبيض مستمرة &nbsp;&nbsp;&nbsp; 50% تخفيضات على جميع التحاليل</div>
+<div class="container">
+  <div class="header">
+    <h1>💊 نظام إدارة الصيدلية</h1>
+    <div id="storage-status" style="color: rgb(16, 185, 129);">🟢 متصل بالهارد ديسك مباشرة: (21.json)</div>
+  </div>
+  
+  <div class="top-actions">
+    <button class="btn" onclick="openModal(&#39;add&#39;)">➕ إضافة دواء</button>
+    <button class="btn btn-success" onclick="openModal(&#39;trans&#39;)">🔄 تسجيل حركة</button>
+    <button class="btn btn-warning" onclick="openModal(&#39;stock&#39;)">📋 جرد</button>
+    <button class="btn" onclick="generateFullReport()">📊 تقرير يومي شامل</button>
+    <button class="btn" onclick="exportData()">💾 تصدير Excel</button>
+    <label>
+      <input type="file" id="importFile" style="display:none" onchange="importData(this)" accept=".xlsx,.xls">
+      <span class="btn" style="display:inline-block;cursor:pointer">📥 استيراد بيانات (Excel)</span>
+    </label>
+    
+    <button class="btn" style="background:#8b5cf6;" onclick="initFile(&#39;open&#39;)">📁 فتح ملف الهارد</button>
+    <button class="btn" style="background:#6366f1;" onclick="initFile(&#39;create&#39;)">🆕 إنشاء ملف هارد جديد</button>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><h3>إجمالي الأدوية</h3><p id="st-total">55</p></div>
+    <div class="stat"><h3>الكمية الإجمالية</h3><p id="st-qty">921</p></div>
+    <div class="stat"><h3>تنبيهات نقص</h3><p id="st-alert">15</p></div>
+    <div class="stat"><h3>الحركات الداخلية</h3><p id="st-internal">1</p></div>
+    <div class="stat"><h3>الحركات الخارجية</h3><p id="st-external">0</p></div>
+    <div class="stat"><h3>سجل الحركات</h3><p id="st-trans">110</p></div>
+  </div>
+
+  <div class="panel">
+    <input type="text" placeholder="🔍 بحث..." onkeyup="search(this.value)" style="width:300px;margin-bottom:15px">
+    <table id="mainTable">
+      <thead>
+        <tr><th>الباركود (اضغط للبحث في جوجل)</th><th>الاسم</th><th>الكمية</th><th>الصرف الداخلي</th><th>الصرف الخارجي</th><th>الحالة</th><th>حذف</th></tr>
+      </thead>
+      <tbody><tr>
+      <td><a href="https://www.google.com/search?q=6223002144082" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6223002144082</a></td>
+      <td>برناسورس</td>
+      <td>5</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-green">جيد</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(0)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6221508122016" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6221508122016</a></td>
+      <td>سيلفربيرن</td>
+      <td>10</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-green">جيد</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(1)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6221050130347" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6221050130347</a></td>
+      <td>جيراميسين</td>
+      <td>8</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-green">جيد</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(2)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6224001007224" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6224001007224</a></td>
+      <td>كينا كومب</td>
+      <td>5</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-green">جيد</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(3)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=8002660038326" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 8002660038326</a></td>
+      <td>ايروكسول</td>
+      <td>8</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-green">جيد</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(4)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6221151000891" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6221151000891</a></td>
+      <td>فاركولين</td>
+      <td>6</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-green">جيد</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(5)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6224007321201" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6224007321201</a></td>
+      <td>بليجيكا</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-red">منخفض</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(6)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6221032230157" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6221032230157</a></td>
+      <td>Picolax</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+      <td><span class="badge bg-red">منخفض</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(7)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6223013531918" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6223013531918</a></td>
+      <td>اوتروفين</td>
+      <td>5</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-green">جيد</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(8)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6221060003181" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6221060003181</a></td>
+      <td>ليدوكايين ايوسول</td>
+      <td>13</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-green">جيد</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(9)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6221032312181" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6221032312181</a></td>
+      <td>ابيسيفين 1جم</td>
+      <td>14</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-green">جيد</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(10)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6222010670354" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6222010670354</a></td>
+      <td>ليدوكايين 2%</td>
+      <td>9</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-green">جيد</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(11)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6221032310002" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6221032310002</a></td>
+      <td>سيفوتاكس 1جم</td>
+      <td>5</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-green">جيد</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(12)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6221508162715" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6221508162715</a></td>
+      <td>زوراكسون 1جم</td>
+      <td>24</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-green">جيد</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(13)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6223003970406" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6223003970406</a></td>
+      <td>راميتاكس 1جم</td>
+      <td>23</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-green">جيد</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(14)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6221508161114" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6221508161114</a></td>
+      <td>يونيكتام 750</td>
+      <td>85</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-green">جيد</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(15)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6221508161213" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6221508161213</a></td>
+      <td>يونيكتام 1500</td>
+      <td>41</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-green">جيد</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(16)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6222012207008" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6222012207008</a></td>
+      <td>سيفوتاكس 1جم</td>
+      <td>62</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-green">جيد</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(17)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6221151002444" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6221151002444</a></td>
+      <td>سالبين 1جم</td>
+      <td>43</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-green">جيد</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(18)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6223004199691" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6223004199691</a></td>
+      <td>فيوتابان 40 مم</td>
+      <td>20</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-green">جيد</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(19)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=62}%C3%97%E2%80%991123%D8%B8%D9%90" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 62}×’1123ظِ</a></td>
+      <td>اتروفنت 250 مج</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-red">منخفض</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(20)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=62}%C3%97%E2%80%991126%D8%B8%D9%90" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 62}×’1126ظِ</a></td>
+      <td>اتروفنت 500 مج</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-red">منخفض</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(21)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=5000456010870" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 5000456010870</a></td>
+      <td>بالماكورت 5.</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-red">منخفض</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(22)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=22222222222" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 22222222222</a></td>
+      <td>بالما كورت 25.</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-red">منخفض</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(23)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6221075070215" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6221075070215</a></td>
+      <td>امريزول</td>
+      <td>24</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-green">جيد</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(24)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6223003975456" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6223003975456</a></td>
+      <td>باراسيتامول</td>
+      <td>15</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-green">جيد</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(25)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6224000588007" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6224000588007</a></td>
+      <td>بيفاتراسين</td>
+      <td>31</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-green">جيد</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(26)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6223003991807" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6223003991807</a></td>
+      <td>افيل</td>
+      <td>16</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-green">جيد</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(27)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6223002641840" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6223002641840</a></td>
+      <td>كتافلام</td>
+      <td>8</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-green">جيد</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(28)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=3333333333" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 3333333333</a></td>
+      <td>ابيفرين</td>
+      <td>75</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-green">جيد</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(29)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6221508171922" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6221508171922</a></td>
+      <td>ديكسامثازون</td>
+      <td>18</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-green">جيد</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(30)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6223002978304" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6223002978304</a></td>
+      <td>دانست 4 مج</td>
+      <td>13</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-green">جيد</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(31)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6223002978298" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6223002978298</a></td>
+      <td>دانست 2 مج</td>
+      <td>22</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-green">جيد</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(32)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6222003700082" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6222003700082</a></td>
+      <td>دايسينون</td>
+      <td>26</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-green">جيد</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(33)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6221075030042" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6221075030042</a></td>
+      <td>كيتولاك</td>
+      <td>66</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-green">جيد</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(34)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6221025012708" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6221025012708</a></td>
+      <td>كابرون</td>
+      <td>8</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-green">جيد</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(35)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6223003990800" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6223003990800</a></td>
+      <td>لاسيكس</td>
+      <td>13</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-green">جيد</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(36)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6221051861370" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6221051861370</a></td>
+      <td>ليفابيون</td>
+      <td>17</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-green">جيد</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(37)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6221075030028" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6221075030028</a></td>
+      <td>سبازموفين</td>
+      <td>27</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-green">جيد</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(38)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6223002971213" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6223002971213</a></td>
+      <td>سبازموفري</td>
+      <td>32</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-green">جيد</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(39)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6221151003427" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6221151003427</a></td>
+      <td>دكلوفين</td>
+      <td>27</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-green">جيد</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(40)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6223002641857" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6223002641857</a></td>
+      <td>فولتارين</td>
+      <td>7</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-green">جيد</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(41)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6221050010083" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6221050010083</a></td>
+      <td>ايتافيلين</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-red">منخفض</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(42)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6221032314468" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6221032314468</a></td>
+      <td>هيدروكورتيزون 100 مج</td>
+      <td>6</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-green">جيد</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(43)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6223000013748" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6223000013748</a></td>
+      <td>ادولور 30</td>
+      <td>23</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-green">جيد</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(44)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6224000132293" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6224000132293</a></td>
+      <td>بلستر</td>
+      <td>24</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-green">جيد</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(45)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=620305475006013" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 620305475006013</a></td>
+      <td>برولين 3/0 ر</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-red">منخفض</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(46)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=616755531008046" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 616755531008046</a></td>
+      <td>برولين 4/0 ق</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-red">منخفض</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(47)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=624745393003030" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 624745393003030</a></td>
+      <td>برولين 5/0 ق</td>
+      <td>5</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-green">جيد</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(48)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6222006161538" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6222006161538</a></td>
+      <td>برولين 5/0 ر</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-red">منخفض</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(49)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6222006162085" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6222006162085</a></td>
+      <td>برولين 6/0 ق</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-red">منخفض</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(50)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6222014408212" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6222014408212</a></td>
+      <td>فيكريل 3/0 ر</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-red">منخفض</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(51)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6222014408298" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6222014408298</a></td>
+      <td>فيكريل 4/0 ق</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-red">منخفض</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(52)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6222014408564" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6222014408564</a></td>
+      <td>فيكريل 6/0 ق</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-red">منخفض</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(53)">حذف</button></td>
+    </tr><tr>
+      <td><a href="https://www.google.com/search?q=6222014408571" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 6222014408571</a></td>
+      <td>فيكريل 6/0 ر</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td><span class="badge bg-red">منخفض</span></td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(54)">حذف</button></td>
+    </tr></tbody>
+    </table>
+  </div>
 </div>
 
-<div class="main-wrapper">
-    <div class="side-panel">
-        <h3>خدماتنا المتميزة ✨</h3>
-        <ul style="list-style:none; padding:0; line-height:2;">
-            <li>🚑 الطوارئ متوفرة 24 ساعة يومياً</li>
-            <li>🧪 المعمل متوفر 24 ساعة لخدمتك</li>
-            <li>✅ نخبة من الأطباء المتخصصين</li>
-            <li>✅ أحدث الأجهزة الطبية</li>
-            <li>✅ رعاية متكاملة طوال الأسبوع</li>
-        </ul>
-    </div>
+<button class="fab" onclick="openModal(&#39;trans&#39;)">⚡ تسجيل سريع</button>
 
-    <div class="container">
-        <img src="logo.png" alt="Logo" class="main-logo">
-        <h2>مجمع شبراملس الطبي</h2>
-        <form id="booking-form" autocomplete="off">
-            <div class="form-group">
-                <label>اسم المريض:</label>
-                <input type="text" id="pName" required placeholder="الاسم الثلاثي" autocomplete="one-time-code">
-            </div>
-            <div class="form-group">
-                <label>يوم الحجز:</label>
-                <select id="bDay" required onchange="updateSpecialties()">
-                    <option value="">اختر اليوم...</option>
-                    <option value="السبت">السبت</option><option value="الأحد">الأحد</option><option value="الإثنين">الإثنين</option><option value="الثلاثاء">الثلاثاء</option><option value="الأربعاء">الأربعاء</option><option value="الخميس">الخميس</option><option value="الجمعة">الجمعة</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>العيادة:</label>
-                <select id="specialty" required onchange="updateDoctors()">
-                    <option value="">اختر اليوم أولاً...</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>الطبيب:</label>
-                <select id="doctorName" required>
-                    <option value="">اختر العيادة أولاً...</option>
-                </select>
-            </div>
-            <div class="button-group">
-                <button type="submit" class="submit-btn" id="btn">تأكيد الحجز</button>
-                <button type="button" class="cancel-btn" onclick="resetKimoForm()">إلغاء</button>
-            </div>
-            <p id="loader" style="display:none; margin-top:15px;">جاري إرسال الحجز... ⏳</p>
-        </form>
-
-        <div id="success-msg">
-            <h3 style="color:var(--success-color);">✅ تم الحجز بنجاح</h3>
-            <p>المريض: <b id="res-name"></b></p>
-            <p>الطبيب: <b id="res-doc"></b></p>
-            <p style="color: var(--primary-color); font-weight: bold; margin-bottom: 5px;">يرجى تصوير الشاشة وإظهارها لموظف الاستقبال</p>
-            <p>رقم الدور التقريبي: <b id="b-num" style="font-size:45px; display: block; margin: 10px 0;">0</b></p>
-            <p style="color: var(--cancel-color); font-size: 15px; font-weight: bold; margin-bottom: 20px;">سيتم إلغاء الحجز حين انتهاء وقت العيادة</p>
-            <button onclick="location.reload()" class="cancel-btn">حجز جديد</button>
-        </div>
-    </div>
-
-    <div class="side-panel">
-        <h3>📍 تواصل معنا</h3>
-        <p style="line-height: 1.6; font-weight: 500;">
-            <strong>العنوان:</strong><br> شبراملس – امتداد شارع السوق - أعلي مسجد عباد الرحمن
-        </p>
-        <hr style="border: 0; border-top: 1px solid #cfd8dc; margin: 15px 0;">
-        <p><strong>للحجز والاستفسار:</strong></p>
-        <ul style="list-style:none; padding:0; line-height:2; direction: ltr; text-align: right;">
-            <li>01020580002 :واتساب</li>
-            <li>01122593433 📲</li>
-            <li>0404650337 📞</li>
-            <li>0404658010 📞</li>
-        </ul>
-    </div>
+<div id="modalAdd" class="modal" style="display: none;">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal(&#39;add&#39;)">×</span>
+    <h2>إضافة دواء جديد</h2>
+    <input id="newBarcode" placeholder="الباركود">
+    <input id="newName" placeholder="اسم الدواء">
+    <input id="newQty" type="number" placeholder="الكمية">
+    <input id="newMin" type="number" placeholder="الحد الأدنى">
+    <button class="btn btn-success" onclick="saveDrug()" style="width:100%">حفظ</button>
+  </div>
 </div>
+
+<div id="modalTrans" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal(&#39;trans&#39;)">×</span>
+    <h2>تسجيل حركة</h2>
+    <input id="transBarcode" placeholder="ابحث بالباركود..." onkeyup="findDrugByBarcode(this.value)">
+    <select id="transDrug"><option value="">اختر الدواء</option><option value="0">برناسورس (5)</option><option value="1">سيلفربيرن (10)</option><option value="2">جيراميسين (8)</option><option value="3">كينا كومب (5)</option><option value="4">ايروكسول (8)</option><option value="5">فاركولين (6)</option><option value="6">بليجيكا (4)</option><option value="7">Picolax (2)</option><option value="8">اوتروفين (5)</option><option value="9">ليدوكايين ايوسول (13)</option><option value="10">ابيسيفين 1جم (14)</option><option value="11">ليدوكايين 2% (9)</option><option value="12">سيفوتاكس 1جم (5)</option><option value="13">زوراكسون 1جم (24)</option><option value="14">راميتاكس 1جم (23)</option><option value="15">يونيكتام 750 (85)</option><option value="16">يونيكتام 1500 (41)</option><option value="17">سيفوتاكس 1جم (62)</option><option value="18">سالبين 1جم (43)</option><option value="19">فيوتابان 40 مم (20)</option><option value="20">اتروفنت 250 مج (3)</option><option value="21">اتروفنت 500 مج (2)</option><option value="22">بالماكورت 5. (3)</option><option value="23">بالما كورت 25. (2)</option><option value="24">امريزول (24)</option><option value="25">باراسيتامول (15)</option><option value="26">بيفاتراسين (31)</option><option value="27">افيل (16)</option><option value="28">كتافلام (8)</option><option value="29">ابيفرين (75)</option><option value="30">ديكسامثازون (18)</option><option value="31">دانست 4 مج (13)</option><option value="32">دانست 2 مج (22)</option><option value="33">دايسينون (26)</option><option value="34">كيتولاك (66)</option><option value="35">كابرون (8)</option><option value="36">لاسيكس (13)</option><option value="37">ليفابيون (17)</option><option value="38">سبازموفين (27)</option><option value="39">سبازموفري (32)</option><option value="40">دكلوفين (27)</option><option value="41">فولتارين (7)</option><option value="42">ايتافيلين (2)</option><option value="43">هيدروكورتيزون 100 مج (6)</option><option value="44">ادولور 30 (23)</option><option value="45">بلستر (24)</option><option value="46">برولين 3/0 ر (2)</option><option value="47">برولين 4/0 ق (1)</option><option value="48">برولين 5/0 ق (5)</option><option value="49">برولين 5/0 ر (4)</option><option value="50">برولين 6/0 ق (3)</option><option value="51">فيكريل 3/0 ر (1)</option><option value="52">فيكريل 4/0 ق (1)</option><option value="53">فيكريل 6/0 ق (1)</option><option value="54">فيكريل 6/0 ر (1)</option></select>
+    <div class="radio-group">
+      <label><input type="radio" name="transType" value="وارد" checked="">🟢 وارد (+)</label>
+      <label><input type="radio" name="transType" value="صرف">🔴 صرف (-)</label>
+      <label><input type="radio" name="transType" value="صرف داخلي">🟠 صرف داخلي</label>
+    </div>
+    <input id="transQty" type="number" placeholder="الكمية" value="1">
+    <button class="btn btn-success" onclick="saveTrans()" style="width:100%">تنفيذ</button>
+  </div>
+</div>
+
+<div id="modalStock" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal(&#39;stock&#39;)">×</span>
+    <h2>جرد دواء</h2>
+    <input id="stockBarcode" placeholder="امسح الباركود..." onkeyup="findForStock(this.value)">
+    <div id="stockInfo" style="margin:10px 0; color:#94a3b8"></div>
+    <input id="stockActual" type="number" placeholder="الكمية الفعلية">
+    <button class="btn btn-success" onclick="saveStock()" style="width:100%">تحديث الكمية (حساب الفرق)</button>
+  </div>
+</div>
+
+<div id="toast" style="transform: translateY(100px);">تم التزامن الحقيقي مع الهارد ديسك آلياً ✔️</div>
 
 <script>
-    // الرابط الجديد الخاص بك
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbyLf39cWcKOwOgXfE-A51NbXLPnNatwq-22Bm7IGDJvjjINsqkJLWMFtVtjAkDA47jdVQ/exec';
+let drugs = JSON.parse(localStorage.getItem('ph_drugs') || '[]');
+let trans = JSON.parse(localStorage.getItem('ph_trans') || '[]');
+let fileHandle = null;
 
-    const scheduleData = {
-        "السبت": { "أسنان": ["د. رنا حمودة (أسنان)", "د. خالد الداهس (أسنان)"], "مسالك": ["د. علي منتصر (مسالك بولية)"], "أنف وأذن": ["د. محمد هيكل (أنف وأذن وحنجرة)"], "عيون": ["محمد مجدي سعده (عيون)"] },
-        "الأحد": { "قلب": ["د. أحمد مسعد الغلبان (قلب وأوعية)"], "أسنان": ["د. محمد علاء (أسنان)", "د. محمود دهب (أسنان)"], "عيون": ["د. خالد أحمد الشيخ (رمد)"], "عظام": ["د.إبراهيم مطاوع (عظام وعمود فقري)"], "مسالك": ["د. علي منتصر (مسالك بولية)"] },
-        "الإثنين": { "نساء": ["د. هيام السمراوي (نساء وتوليد)"], "مخ وأعصاب": ["د. محمد سلام (مخ وأعصاب)"], "أسنان": ["د. رنا حمودة (أسنان)", "د. خالد الداهس (أسنان)"], "مسالك": ["د. علي منتصر (مسالك بولية)"] },
-        "الثلاثاء": { "نفسية": ["د. آلاء الحوت (نفسية وعصبية)"], "أنف وأذن": ["د. سناء الحماقي (أنف وأذن)"], "أسنان": ["د. محمد علاء (أسنان)", "د. محمود دهب (أسنان)"], "عظام": ["إبراهيم مطاوع (عظام وعمود فقري)"], "عيون": ["محمد مجدي سعده (عيون)"], "مسالك": ["د. علي منتصر (مسالك بولية)"] },
-        "الأربعاء": { "أسنان": ["د. رنا حمودة (أسنان)", "د. خالد الداهس (أسنان)"], "قلب": ["د. أحمد مسعد الغلبان (قلب وأوعية)"], "اطفال": ["د. جينا عبدالله الشافعي (اطفال)"], "مسالك": ["د. علي منتصر (مسالك بولية)"] },
-        "الخميس": { "قلب": ["د. أحمد مسعد الغلبان (قلب وأوعية)"], "أنف وأذن": ["د. محمد هيكل (أنف وأذن وحنجرة)"], "أسنان": ["د. محمد علاء (أسنان)", "د. محمود دهب (أسنان)"], "عظام": ["إبراهيم مطاوع (عظام وعمود فقري)"], "عيون": ["محمد مجدي سعده (عيون)"], "مسالك": ["د. علي منتصر (مسالك بولية)"], "صدر": ["د. أسامة الخشن (اخصائي الصدر - 05:00 عصراً)"] },
-        "الجمعة": { "باطنة ومناظير": ["د. عزيز بدير (باطنة ومناظير)"] }
+async function persistData(){ 
+  localStorage.setItem('ph_drugs',JSON.stringify(drugs)); 
+  localStorage.setItem('ph_trans',JSON.stringify(trans)); 
+  if(fileHandle) {
+    try {
+      const writable = await fileHandle.createWritable();
+      await writable.write(JSON.stringify({ drugs, trans }, null, 2));
+      await writable.close();
+      showToast('تم التزامن الحقيقي مع الهارد ديسك آلياً ✔️');
+    } catch (err) {
+      showToast('⚠️ فشل التحديث التلقائي على الهارد');
+    }
+  }
+}
+
+async function initFile(mode) {
+  try {
+    const options = { types: [{ description: 'Pharmacy Database', accept: {'application/json': ['.json']} }] };
+    if (mode === 'open') { [fileHandle] = await window.showOpenFilePicker(options); } 
+    else { fileHandle = await window.showSaveFilePicker(options); }
+    const file = await fileHandle.getFile();
+    const contents = await file.text();
+    if (contents.trim()) {
+      const parsed = JSON.parse(contents);
+      drugs = parsed.drugs || [];
+      trans = parsed.trans || [];
+    }
+    const statusDiv = document.getElementById('storage-status');
+    statusDiv.textContent = `🟢 متصل بالهارد ديسك مباشرة: (${file.name})`;
+    statusDiv.style.color = '#10b981';
+    updateStats();
+    showToast('تم ربط وتفعيل ملف الهارد بنجاح');
+  } catch(e) { showToast('تم إلغاء عملية ربط الملف'); }
+}
+
+function showToast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.style.transform='translateY(0)'; setTimeout(()=>t.style.transform='translateY(100px)',3000); }
+
+function updateStats(){
+  document.getElementById('st-total').textContent=drugs.length;
+  document.getElementById('st-qty').textContent=drugs.reduce((a,b)=>a+b.qty,0);
+  document.getElementById('st-alert').textContent=drugs.filter(d=>d.qty<d.min).length;
+  document.getElementById('st-trans').textContent=trans.length;
+  document.getElementById('st-internal').textContent=trans.filter(t=>t.type==='صرف داخلي').length;
+  document.getElementById('st-external').textContent=trans.filter(t=>t.type==='صرف').length;
+  persistData(); render();
+}
+
+function render(){
+  const tb=document.querySelector('#mainTable tbody'); tb.innerHTML='';
+  drugs.forEach((d,i)=>{
+    let internal = trans.filter(t => t.b === d.b && t.type === 'صرف داخلي').reduce((sum, t) => sum + t.q, 0);
+    let external = trans.filter(t => t.b === d.b && t.type === 'صرف').reduce((sum, t) => sum + t.q, 0);
+
+    let badge='<span class="badge bg-green">جيد</span>';
+    if(d.qty<d.min) badge='<span class="badge bg-red">منخفض</span>';
+    if(d.qty==0) badge='<span class="badge bg-orange">نفذ</span>';
+    
+    // تم تحويل الباركود هنا إلى رابط يبحث في جوجل عند الضغط عليه باللون الأزرق المريح
+    tb.innerHTML+=`<tr>
+      <td><a href="https://www.google.com/search?q=${d.b}" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 ${d.b}</a></td>
+      <td>${d.n}</td>
+      <td>${d.qty}</td>
+      <td>${internal}</td>
+      <td>${external}</td>
+      <td>${badge}</td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(${i})">حذف</button></td>
+    </tr>`;
+  });
+  const sel=document.getElementById('transDrug'); sel.innerHTML='<option value="">اختر الدواء</option>';
+  drugs.forEach((d,i)=>{ sel.innerHTML+=`<option value="${i}">${d.n} (${d.qty})</option>`; });
+}
+
+function findDrugByBarcode(b){ const sel=document.getElementById('transDrug'); const index=drugs.findIndex(d=>d.b===b); if(index>-1) sel.value=index; }
+function findForStock(b){ const d=drugs.find(x=>x.b===b); document.getElementById('stockInfo').textContent=d?`الدواء: ${d.n} | المسجل: ${d.qty}`:'غير موجود'; }
+
+function saveStock(){
+  const b=document.getElementById('stockBarcode').value; const actual=parseInt(document.getElementById('stockActual').value);
+  const idx=drugs.findIndex(x=>x.b===b);
+  if(idx>-1){
+    const diff=actual-drugs[idx].qty;
+    drugs[idx].qty=actual;
+    trans.push({date:new Date().toLocaleDateString('ar-SA'), time:new Date().toLocaleTimeString('ar-SA'), b, n:drugs[idx].n, q:diff, type:'جرد'});
+    updateStats(); closeModal('stock'); showToast('تم تحديث الجرد');
+  }
+}
+
+function generateFullReport(){
+  let reportData = drugs.map(d => {
+    let internal = trans.filter(t => t.b === d.b && t.type === 'صرف داخلي').reduce((sum, t) => sum + t.q, 0);
+    let external = trans.filter(t => t.b === d.b && t.type === 'صرف').reduce((sum, t) => sum + t.q, 0);
+    let actual = d.qty + internal + external; 
+    return {
+      'اسم العلاج': d.n,
+      'الكمية الفعلية': actual,
+      'الصرف الداخلي': internal,
+      'الصرف الخارجي': external,
+      'الكمية المتوفرة حاليا': d.qty,
+      'تنبيه النقص': d.qty < d.min ? 'يوجد نقص' : 'سليم'
     };
+  });
+  const ws=XLSX.utils.json_to_sheet(reportData); const wb=XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb,ws,'التقرير الشامل');
+  XLSX.writeFile(wb, `Report_${new Date().toISOString().slice(0,10)}.xlsx`);
+  showToast('تم تصدير التقرير اليومي');
+}
 
-    function updateSpecialties() {
-        const day = document.getElementById('bDay').value;
-        const specSelect = document.getElementById('specialty');
-        specSelect.innerHTML = '<option value="">اختر العيادة...</option>';
-        if(day && scheduleData[day]) {
-            Object.keys(scheduleData[day]).forEach(s => specSelect.add(new Option(s, s)));
+function importData(inp){
+  const file = inp.files[0]; if(!file) return; 
+  const reader = new FileReader();
+  
+  reader.onload = function(e){ 
+    const data = new Uint8Array(e.target.result); 
+    const workbook = XLSX.read(data, {type: 'array'}); 
+    const rows = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]); 
+    
+    let importedCount = 0;
+    
+    rows.forEach(r => {
+      if(r.b && r.n) {
+        const barcode = String(r.b).trim();
+        const name = String(r.n).trim();
+        const qty = parseInt(r.q) || 0;
+        const type = (r.type || 'وارد').trim(); 
+        const dateStr = r.date || new Date().toLocaleDateString('ar-SA');
+        const timeStr = r.time || new Date().toLocaleTimeString('ar-SA');
+        const minLimit = parseInt(r.min) || 3; 
+
+        trans.push({ date: dateStr, time: timeStr, b: barcode, n: name, q: qty, type: type });
+
+        const existingDrugIndex = drugs.findIndex(d => String(d.b).trim() === barcode);
+        
+        if (existingDrugIndex > -1) {
+          if (type === 'وارد') {
+            drugs[existingDrugIndex].qty = (parseInt(drugs[existingDrugIndex].qty) || 0) + qty;
+          } else if (type === 'صرف' || type === 'صرف داخلي') {
+            drugs[existingDrugIndex].qty = (parseInt(drugs[existingDrugIndex].qty) || 0) - qty;
+          }
+        } else {
+          let initialQty = 0;
+          if (type === 'وارد') initialQty = qty;
+          else if (type === 'صرف' || type === 'صرف داخلي') initialQty = -qty;
+
+          drugs.push({ b: barcode, n: name, qty: initialQty, min: minLimit });
         }
-    }
-
-    function updateDoctors() {
-        const day = document.getElementById('bDay').value;
-        const spec = document.getElementById('specialty').value;
-        const docSelect = document.getElementById('doctorName');
-        docSelect.innerHTML = '<option value="">اختر الطبيب...</option>';
-        if(day && spec && scheduleData[day][spec]) {
-            scheduleData[day][spec].forEach(d => docSelect.add(new Option(d, d)));
-        }
-    }
-
-    function resetKimoForm() {
-        document.getElementById('booking-form').reset();
-    }
-
-    const form = document.getElementById('booking-form');
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        document.getElementById('btn').style.display = 'none';
-        document.getElementById('loader').style.display = 'block';
-
-        const payload = {
-            patientName: document.getElementById('pName').value,
-            bookingDay: document.getElementById('bDay').value,
-            specialty: document.getElementById('specialty').value,
-            doctorName: document.getElementById('doctorName').value
-        };
-
-        fetch(scriptURL, {
-            method: 'POST',
-            body: JSON.stringify(payload)
-        })
-        .then(res => res.json())
-        .then(data => {
-            document.getElementById('loader').style.display = 'none';
-            form.style.display = 'none';
-            
-            // تحديث رسالة النجاح بالبيانات الحقيقية
-            document.getElementById('res-name').innerText = payload.patientName;
-            document.getElementById('res-doc').innerText = payload.doctorName;
-            document.getElementById('b-num').innerText = data.turn; // رقم الدور من جوجل شيت
-            
-            document.getElementById('success-msg').style.display = 'block';
-        })
-        .catch(error => {
-            console.error('Error!', error);
-            alert("حدث خطأ أثناء الاتصال بالسيرفر، يرجى المحاولة مرة أخرى.");
-            document.getElementById('btn').style.display = 'block';
-            document.getElementById('loader').style.display = 'none';
-        });
+        importedCount++;
+      }
     });
+    
+    updateStats(); 
+    showToast(`🔄 تم استيراد وتحديث ${importedCount} حركة بنجاح وظهورها في الجدول!`); 
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+function openModal(t){ document.getElementById('modal'+t.charAt(0).toUpperCase()+t.slice(1)).style.display='flex'; }
+function closeModal(t){ document.getElementById('modal'+t.charAt(0).toUpperCase()+t.slice(1)).style.display='none'; }
+
+function openQuickTrans(type) {
+  openModal('trans');
+  const radio = document.querySelector(`input[name="transType"][value="${type}"]`);
+  if(radio) radio.checked = true;
+}
+
+function openEditModal() {
+  const idx = document.getElementById('transDrug').value;
+  if(idx === "") {
+    showToast("⚠️ من فضلك اختر الدواء أولاً من القائمة المنسدلة لتعديله!");
+    return;
+  }
+  const drug = drugs[idx];
+  document.body.insertAdjacentHTML('beforeend', `
+    <div id="dynamicEditModal" class="modal" style="display:flex;">
+      <div class="modal-content">
+        <h3>✏️ تعديل بيانات العلاج</h3>
+        <label>اسم الدواء</label>
+        <input type="text" id="editName" class="form-control" value="${drug.n}">
+        <label>الباركود</label>
+        <input type="text" id="editBarcode" class="form-control" value="${drug.b}">
+        <label>حد النقص (الحد الأدنى)</label>
+        <input type="number" id="editMin" class="form-control" value="${parseInt(drug.min)||3}">
+        <div style="text-align:left; margin-top:15px;">
+          <button class="btn bg-green" onclick="saveEditedDrug(${idx})">حفظ التعديلات</button>
+          <button class="btn btn-danger" onclick="document.getElementById('dynamicEditModal').remove()">إلغاء</button>
+        </div>
+      </div>
+    </div>
+  `);
+}
+
+function saveEditedDrug(idx) {
+  const newName = document.getElementById('editName').value.trim();
+  const newBarcode = document.getElementById('editBarcode').value.trim();
+  const newMin = parseInt(document.getElementById('editMin').value) || 3;
+
+  if(!newName || !newBarcode) {
+    showToast("⚠️ الاسم والباركود مطلوبان!");
+    return;
+  }
+
+  const oldBarcode = drugs[idx].b;
+  trans.forEach(t => {
+    if(t.b === oldBarcode) {
+      t.b = newBarcode;
+      t.n = newName;
+    }
+  });
+
+  drugs[idx].n = newName;
+  drugs[idx].b = newBarcode;
+  drugs[idx].min = newMin;
+
+  document.getElementById('dynamicEditModal').remove();
+  updateStats();
+  showToast("✏️ تم تعديل بيانات العلاج وتحديث السجلات بنجاح!");
+}
+
+function saveDrug(){ const b=document.getElementById('newBarcode').value; const n=document.getElementById('newName').value; const q=parseInt(document.getElementById('newQty').value)||0; const m=parseInt(document.getElementById('newMin').value)||3; drugs.push({b,n,qty:q,min:m}); updateStats(); closeModal('add'); }
+
+function saveTrans(){ 
+  const idx=document.getElementById('transDrug').value; 
+  if(idx === "") return;
+  const type=document.querySelector('input[name="transType"]:checked').value; 
+  const q=parseInt(document.getElementById('transQty').value)||0; 
+  let currentQty = parseInt(drugs[idx].qty) || 0; 
+  
+  drugs[idx].qty = currentQty + (type==='وارد' ? q : -q); 
+  trans.push({date:new Date().toLocaleDateString('ar-SA'), time:new Date().toLocaleTimeString('ar-SA'), b:drugs[idx].b, n:drugs[idx].n, q, type}); 
+  updateStats(); 
+  closeModal('trans'); 
+}
+
+function del(i){ if(window.confirm('هل تريد الحذف؟')){ drugs.splice(i,1); updateStats(); } }
+function search(v){ const rows=document.querySelectorAll('#mainTable tbody tr'); rows.forEach(r=>{ r.style.display=r.textContent.includes(v)?'':'none'; }); }
+function exportData(){ const ws=XLSX.utils.json_to_sheet(trans); const wb=XLSX.book_new(); XLSX.utils.book_append_sheet(wb,ws,'سجل الحركات'); XLSX.writeFile(wb, `Backup_Trans_${new Date().toISOString().slice(0,10)}.xlsx`); showToast('تم حفظ نسخة احتياطية'); }
+
+// --- منظومة الجرد الفوري المتقدمة مع أزرار التصدير الذكية ---
+function openInventoryModal() {
+  document.body.insertAdjacentHTML('beforeend', `
+    <div id="inventoryAuditModal" class="modal" style="display:flex;">
+      <div class="modal-content" style="max-width: 950px; width: 95%;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+          <h3>📋 غرفة الجرد الذكي ومطابقة الرف</h3>
+          <button class="btn btn-danger" style="padding:5px 15px;" onclick="document.getElementById('inventoryAuditModal').remove()">إغلاق ❌</button>
+        </div>
+        
+        <div style="background:#1e293b; padding:15px; border-radius:8px; margin-bottom:15px; display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+          <label style="font-weight:bold; color:#a78bfa; margin:0;">⚡ فحص سريع (Scanner):</label>
+          <input type="text" id="inventoryScannerInput" class="form-control" placeholder="مرر جهاز الباركود هنا..." style="margin:0; flex:1; min-width:200px;" oninput="filterInventoryByBarcode(this.value)">
+          
+          <button class="btn bg-green" style="padding:10px 15px; margin:0;" onclick="exportAuditReport()">🟢 تصدير تقرير الفوارق (Excel)</button>
+          <button class="btn" style="padding:10px 15px; margin:0; background:#f59e0b;" onclick="exportShortagesReport()">📦 تصدير طلبية النواقص (Excel)</button>
+        </div>
+
+        <div style="max-height: 400px; overflow-y: auto;">
+          <table class="table" id="auditTable" style="width:100%; text-align:center;">
+            <thead>
+              <tr style="background:#1e293b;">
+                <th>الباركود</th>
+                <th>اسم الدواء</th>
+                <th>الكمية بالسيستم</th>
+                <th style="width:150px;">الكمية الفعلية (الرف)</th>
+                <th>الفارق الحالي</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${drugs.map((d, i) => `
+                <tr id="auditRow_${d.b}" class="audit-row-item">
+                  <td>${d.b}</td>
+                  <td style="font-weight:bold; color:#38bdf8;">${d.n}</td>
+                  <td style="color:#fef08a; font-weight:bold;" id="sysQty_${i}">${parseInt(d.qty)||0}</td>
+                  <td>
+                    <input type="number" id="actualQty_${i}" class="form-control" style="margin:0; text-align:center; padding:5px;" placeholder="-" oninput="calculateAuditDiff(${i})">
+                  </td>
+                  <td id="diffQty_${i}" style="font-weight:bold; color:#94a3b8;">0</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+        
+        <div style="text-align:left; margin-top:20px;">
+          <button class="btn bg-green" style="padding:12px 25px;" onclick="submitInventoryAudit()">✔️ اعتماد التسوية وتحديث المخزن</button>
+        </div>
+      </div>
+    </div>
+  `);
+  setTimeout(() => document.getElementById('inventoryScannerInput').focus(), 100);
+}
+
+function filterInventoryByBarcode(val) {
+  const cleanVal = val.trim();
+  const rows = document.querySelectorAll('.audit-row-item');
+  rows.forEach(r => {
+    if(cleanVal === "" || r.id === `auditRow_${cleanVal}`) {
+      r.style.display = '';
+      if(cleanVal !== "") {
+        r.style.background = '#334155';
+        const input = r.querySelector('input[type="number"]');
+        if(input) input.focus();
+      } else { r.style.background = ''; }
+    } else {
+      r.style.display = 'none';
+    }
+  });
+}
+
+function calculateAuditDiff(idx) {
+  const sys = parseInt(document.getElementById(`sysQty_${idx}`).innerText) || 0;
+  const actualVal = document.getElementById(`actualQty_${idx}`).value;
+  const diffTd = document.getElementById(`diffQty_${idx}`);
+  
+  if(actualVal === "") {
+    diffTd.innerText = "0";
+    diffTd.style.color = "#94a3b8";
+    return;
+  }
+  
+  const actual = parseInt(actualVal) || 0;
+  const diff = actual - sys;
+  
+  if(diff === 0) {
+    diffTd.innerText = "مطابق ✔️";
+    diffTd.style.color = "#34d399";
+  } else if(diff > 0) {
+    diffTd.innerText = `+${diff} (زيادة)`;
+    diffTd.style.color = "#38bdf8";
+  } else {
+    diffTd.innerText = `${diff} (عجز)`;
+    diffTd.style.color = "#f87171";
+  }
+}
+
+function submitInventoryAudit() {
+  let auditCount = 0;
+  drugs.forEach((d, i) => {
+    const actualVal = document.getElementById(`actualQty_${i}`).value;
+    if(actualVal !== "") {
+      const sys = parseInt(d.qty) || 0;
+      const actual = parseInt(actualVal) || 0;
+      const diff = actual - sys;
+      
+      if(diff !== 0) {
+        trans.push({
+          date: new Date().toLocaleDateString('ar-SA'),
+          time: new Date().toLocaleTimeString('ar-SA'),
+          b: d.b,
+          n: d.n,
+          q: Math.abs(diff),
+          type: diff > 0 ? 'وارد (تسوية جرد)' : 'صرف (عجز جرد)'
+        });
+      }
+      d.qty = actual;
+      auditCount++;
+    }
+  });
+  
+  if(auditCount > 0) {
+    document.getElementById('inventoryAuditModal').remove();
+    updateStats();
+    showToast(`📋 تم جرد وتسوية ${auditCount} أصناف بنجاح وتحديث الرفوف!`);
+  } else {
+    showToast("⚠️ لم تقم بإدخال أي كميات فعلية لجلدها!");
+  }
+}
+
+// 🟢 دالة تصدير تقرير فوارق الجرد الكامل
+function exportAuditReport() {
+  const reportData = drugs.map((d, i) => {
+    const actualVal = document.getElementById(`actualQty_${i}`).value;
+    const sys = parseInt(d.qty) || 0;
+    const actual = actualVal === "" ? sys : (parseInt(actualVal) || 0);
+    const diff = actual - sys;
+    let status = "مطابق";
+    if(diff > 0) status = `زيادة (+${diff})`;
+    if(diff < 0) status = `عجز (${diff})`;
+
+    return {
+      'الباركود': d.b,
+      'اسم الدواء': d.n,
+      'الكمية بالنظام (الدفترية)': sys,
+      'الكمية الفعلية على الرف': actualVal === "" ? "لم يجرد" : actual,
+      'الفارق الحالي': diff,
+      'الحالة': status
+    };
+  });
+
+  const ws = XLSX.utils.json_to_sheet(reportData);
+  const wb = XLSX.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'تقرير فوارق الجرد');
+  XLSX.writeFile(wb, `تقرير_جرد_المخزن_${new Date().toISOString().slice(0,10)}.xlsx`);
+  showToast('✔️ تم تحميل تقرير فوارق الجرد بنجاح');
+}
+
+// 📦 دالة تجميع وتصدير طلبية النواقص الآلية
+function exportShortagesReport() {
+  const shortages = drugs.filter(d => {
+    const q = parseInt(d.qty) || 0;
+    const m = parseInt(d.min) || 3;
+    return q < m;
+  }).map(d => {
+    const q = parseInt(d.qty) || 0;
+    const m = parseInt(d.min) || 3;
+    const needed = m - q; // حساب الكمية المطلوبة للوصول لحد الأمان
+    return {
+      'الباركود': d.b,
+      'اسم الدواء النواقص': d.n,
+      'الرصيد المتبقي': q,
+      'حد الأمان المطلوب': m,
+      'الكمية المقترحة للطلب': needed <= 0 ? m : needed
+    };
+  });
+
+  if(shortages.length === 0) {
+    showToast('🎉 ممتاز! لا توجد أي نواقص في الصيدلية حالياً لتصديرها.');
+    return;
+  }
+
+  const ws = XLSX.utils.json_to_sheet(shortages);
+  const wb = XLSX.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'طلبية النواقص المطلوبة');
+  XLSX.writeFile(wb, `طلبية_نواقص_الأدوية_${new Date().toISOString().slice(0,10)}.xlsx`);
+  showToast(`📦 تم توليد وتصدير طلبية تحتوي على ${shortages.length} صنف ناقص!`);
+}
+
+function updateStats(){
+  localStorage.setItem('drugs', JSON.stringify(drugs));
+  localStorage.setItem('trans', JSON.stringify(trans));
+  
+  if(document.getElementById('countDrugs')) document.getElementById('countDrugs').innerText = drugs.length;
+  let totalQty = drugs.reduce((sum, d) => sum + (parseInt(d.qty) || 0), 0);
+  if(document.getElementById('totalQty')) document.getElementById('totalQty').innerText = totalQty;
+  
+  let lowStock = drugs.filter(d => {
+    const q = parseInt(d.qty) || 0;
+    const m = parseInt(d.min) || 3;
+    return q < m && q > 0;
+  }).length;
+  if(document.getElementById('lowStock')) document.getElementById('lowStock').innerText = lowStock;
+  
+  render();
+}
+
+function render(){
+  const tb=document.querySelector('#mainTable tbody'); tb.innerHTML='';
+  drugs.forEach((d,i)=>{
+    let internal = trans.filter(t => t.b === d.b && (t.type === 'صرف داخلي' || t.type === 'صرف (عجز جرد)' && d.qty === 0)).reduce((sum, t) => sum + t.q, 0);
+    let external = trans.filter(t => t.b === d.b && t.type === 'صرف').reduce((sum, t) => sum + t.q, 0);
+
+    const currentQty = parseInt(d.qty) || 0;
+    const minLimit = parseInt(d.min) || 3; 
+
+    let badge='<span class="badge bg-green">جيد</span>';
+    if(currentQty <= 0) {
+      badge='<span class="badge bg-orange">نفذ</span>';
+    } else if(currentQty < minLimit) {
+      badge='<span class="badge bg-red">منخفض</span>';
+    }
+    
+    tb.innerHTML+=`<tr>
+      <td><a href="https://www.google.com/search?q=${encodeURIComponent(d.n)}" target="_blank" style="color:#0ea5e9; font-weight:bold; text-decoration:none;">🔗 ${d.b}</a></td>
+      <td>${d.n}</td>
+      <td style="color: #fef08a; font-weight: bold; font-size: 16px;">${currentQty}</td>
+      <td style="color: #38bdf8; font-weight: bold;">${internal}</td>
+      <td style="color: #f87171; font-weight: bold;">${external}</td>
+      <td>${badge}</td>
+      <td><button class="btn btn-danger" style="padding:5px 10px" onclick="del(${i})">حذف</button></td>
+    </tr>`;
+  });
+  const sel=document.getElementById('transDrug'); sel.innerHTML='<option value="">اختر الدواء</option>';
+  drugs.forEach((d,i)=>{ sel.innerHTML+=`<option value="${i}">${d.n} (${d.qty})</option>`; });
+}
+
+(function injectFloatingButtons(){
+  const existingContainer = document.querySelector('.floating-container');
+  if(existingContainer) existingContainer.remove();
+
+  const style = document.createElement('style');
+  style.innerHTML = `
+    .floating-container { position: fixed; bottom: 25px; left: 25px; display: flex; flex-direction: column; gap: 12px; z-index: 9999; }
+    .float-btn { padding: 12px 20px; border-radius: 50px; font-weight: bold; border: none; color: #fff; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.4); transition: transform 0.2s, box-shadow 0.2s; display: flex; align-items: center; gap: 8px; font-size: 14px; }
+    .float-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.6); }
+    .float-internal { background: linear-gradient(135deg, #0ea5e9, #0284c7); }
+    .float-external { background: linear-gradient(135deg, #ef4444, #dc2626); }
+    .float-edit { background: linear-gradient(135deg, #f59e0b, #d97706); }
+    .float-audit { background: linear-gradient(135deg, #a855f7, #7c3aed); }
+  `;
+  document.head.appendChild(style);
+
+  const container = document.createElement('div');
+  container.className = 'floating-container';
+  container.innerHTML = `
+    <button class="float-btn float-internal" onclick="openQuickTrans('صرف داخلي')">🔵 صرف داخلي</button>
+    <button class="float-btn float-external" onclick="openQuickTrans('صرف')">🔴 صرف خارجي</button>
+    <button class="float-btn float-edit" onclick="openEditModal()">✏️ تعديل بيانات علاج</button>
+    <button class="float-btn float-audit" onclick="openInventoryModal()">📋 بدء الجرد ومطابقة الرف</button>
+  `;
+  document.body.appendChild(container);
+})();
+
+updateStats(); render();
 </script>
-</body>
-</html>
+
+</body></html>
